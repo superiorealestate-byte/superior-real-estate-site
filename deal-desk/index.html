@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deal Desk — Superior Real Estate</title>
+<meta name="description" content="Confidential deal origination. Submit a deal or join the investor pipeline.">
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold:       #C9A96E;
+    --gold-light: #E8D5A3;
+    --gold-deep:  #8A6B38;
+    --base:       #060608;
+    --s1:         #0C0C0F;
+    --s2:         #121216;
+    --s3:         #1A1A20;
+    --s4:         #242430;
+    --white:      #FFFFFF;
+    --cream:      #F0EBE0;
+    --muted:      #9C9488;
+    --faint:      #5C574F;
+    --green:      #6FC47A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--base);
+    color: var(--cream);
+    font-family: 'Jost', system-ui, sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image: radial-gradient(rgba(201, 169, 110, .015) 1px, transparent 1px);
+    background-size: 3px 3px;
+    mix-blend-mode: screen;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(24px, 5vw, 64px);
+    border-bottom: 1px solid rgba(201,169,110,.12);
+    background: rgba(6,6,8,.85);
+    backdrop-filter: blur(14px);
+  }
+
+  .wordmark {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-decoration: none;
+  }
+  .wordmark-top {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: .22em;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .wordmark-sub {
+    font-size: 8.5px;
+    font-weight: 400;
+    letter-spacing: .3em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .nav-badge {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--faint);
+    border: 1px solid var(--s4);
+    padding: 5px 12px;
+    border-radius: 2px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120px clamp(24px, 6vw, 80px) 80px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 1px;
+    height: 72px;
+    background: linear-gradient(to bottom, transparent, rgba(201,169,110,.35));
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    opacity: .9;
+    animation: rise .9s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 9vw, 120px);
+    font-weight: 300;
+    line-height: .95;
+    letter-spacing: .04em;
+    color: var(--white);
+    margin-bottom: 12px;
+    animation: rise 1s .1s ease both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 48px;
+    animation: rise 1s .2s ease both;
+  }
+
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 0 auto 48px;
+    animation: rise 1s .25s ease both;
+  }
+
+  .hero-body {
+    max-width: 540px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--muted);
+    margin-bottom: 72px;
+    animation: rise 1s .3s ease both;
+  }
+
+  .hero-body strong {
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  /* ── CARDS ── */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 820px;
+    width: 100%;
+    animation: rise 1s .4s ease both;
+  }
+
+  @media (max-width: 640px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: var(--s1);
+    border: 1px solid var(--s3);
+    padding: clamp(32px, 4vw, 48px) clamp(28px, 3.5vw, 40px);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .4s ease, background .4s ease;
+    cursor: pointer;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,.0), transparent);
+    transition: background .4s ease;
+  }
+
+  .card:hover {
+    border-color: rgba(201,169,110,.35);
+    background: var(--s2);
+  }
+
+  .card:hover::before {
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(201,169,110,.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-icon svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 1.2;
+  }
+
+  .card-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px, 3.5vw, 36px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--white);
+  }
+
+  .card-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .card-desc {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--muted);
+    flex: 1;
+  }
+
+  .card-cta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    transition: gap .3s ease;
+  }
+
+  .card:hover .card-cta { gap: 18px; }
+
+  .card-cta-line {
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+    transition: width .3s ease;
+  }
+
+  .card:hover .card-cta-line { width: 42px; }
+
+  /* ── TRUST ROW ── */
+  .trust {
+    margin-top: 72px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    animation: rise 1s .55s ease both;
+  }
+
+  @media (max-width: 580px) {
+    .trust { flex-direction: column; gap: 16px; }
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: .12em;
+    color: var(--faint);
+    text-transform: uppercase;
+  }
+
+  .trust-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: .6;
+    flex-shrink: 0;
+  }
+
+  .trust-sep {
+    width: 1px;
+    height: 20px;
+    background: var(--s4);
+  }
+
+  /* ── MARKETS ROW ── */
+  .markets {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: fade 1.2s .8s ease both;
+  }
+
+  .market-tag {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--faint);
+    padding: 5px 10px;
+    border: 1px solid var(--s4);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--s3);
+    padding: 28px clamp(24px, 5vw, 64px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-left {
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  .footer-right {
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--faint);
+    letter-spacing: .1em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @keyframes fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(6,6,8,.92);
+    backdrop-filter: blur(12px);
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal {
+    background: var(--s1);
+    border: 1px solid rgba(201,169,110,.2);
+    max-width: 480px;
+    width: 100%;
+    padding: clamp(36px, 5vw, 56px);
+    position: relative;
+    animation: rise .4s ease both;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: none; border: none;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1;
+    transition: color .3s;
+  }
+  .modal-close:hover { color: var(--cream); }
+
+  .modal-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .modal-title em { color: var(--gold); font-style: italic; }
+
+  .modal-body {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+
+  .modal-btn {
+    display: block;
+    width: 100%;
+    padding: 16px 24px;
+    background: transparent;
+    border: 1px solid rgba(201,169,110,.5);
+    color: var(--gold);
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .35s ease;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .modal-btn:hover {
+    background: var(--gold);
+    color: var(--base);
+    box-shadow: 0 0 28px rgba(201,169,110,.25);
+  }
+
+  .modal-note {
+    margin-top: 16px;
+    font-size: 11px;
+    color: var(--faint);
+    text-align: center;
+    letter-spacing: .08em;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="https://superiorealestate-byte.github.io/superior-real-estate-site/" class="wordmark">
+    <span class="wordmark-top">SUPERIOR</span>
+    <span class="wordmark-sub">Real Estate</span>
+  </a>
+  <span class="nav-badge">Deal Desk · Confidential</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <p class="eyebrow">Deal Origination · Private Access</p>
+
+  <h1 class="hero-title">DEAL<br><em>DESK</em></h1>
+  <p class="hero-sub">Access to the exceptional.</p>
+
+  <div class="divider"></div>
+
+  <p class="hero-body">
+    כל מה שמגיע לכאן עובר דרכנו בלבד.<br>
+    <strong>המידע סודי. הצדדים אנונימיים.</strong> אנחנו מחברים
+    בין הון להזדמנות, בשיקול דעת מוחלט ומבלי לחשוף
+    אף צד לפני שהגיע הזמן.
+  </p>
+
+  <!-- CARDS -->
+  <div class="cards">
+
+    <!-- Card A: Deal -->
+    <div class="card" onclick="openModal('deal')">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <span class="card-label">Seller · Developer · Owner</span>
+      <h2 class="card-title">יש לי נכס<br>או <em>עסקה</em></h2>
+      <p class="card-desc">
+        קרקע, מסחרי מניב, מגורים, מלונאות. אם יש לך נכס שדורש שותף הון, יזם, או קונה, הגש כאן בצנעה.
+      </p>
+      <div class="card-cta">
+        <span class="card-cta-line"></span>
+        Submit a Deal
+      </div>
+    </div>
+
+    <!-- Card B: Investor -->
+    <div class="card" onclick="openModal('investor')">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <span class="card-label">Investor · Fund · Family Office</span>
+      <h2 class="card-title">אני מחפש<br><em>להשקיע</em></h2>
+      <p class="card-desc">
+        הגדר את קריטריוני ההשקעה שלך. תקציב, שוק, סוג נכס, אופק. ניצור קשר ברגע שתגיע עסקה שמתאימה.
+      </p>
+      <div class="card-cta">
+        <span class="card-cta-line"></span>
+        Join the Pipeline
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TRUST ROW -->
+  <div class="trust">
+    <div class="trust-item">
+      <div class="trust-dot"></div>
+      Strictly Confidential
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <div class="trust-dot"></div>
+      No Cold Exposure
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <div class="trust-dot"></div>
+      NDA Before Intro
+    </div>
+  </div>
+
+  <!-- MARKET TAGS -->
+  <div class="markets">
+    <div class="market-tag">Israel</div>
+    <div class="market-tag">Cyprus</div>
+    <div class="market-tag">Paris</div>
+    <div class="market-tag">USA</div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-left">Superior Real Estate · Deal Desk · 2026</span>
+  <span class="footer-right">Beyond the Deal.</span>
+</footer>
+
+<!-- MODAL: DEAL -->
+<div class="modal-overlay" id="modal-deal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('deal')">&#x2715;</button>
+    <p class="modal-label">Submit a Deal</p>
+    <h3 class="modal-title">יש לי נכס<br>או <em>עסקה</em></h3>
+    <p class="modal-body">
+      מלא את הפרטים. המידע מגיע אלינו בלבד ונשאר חסוי לחלוטין.
+      לא נחשוף את זהותך לאף צד ללא NDA חתום.
+      <br><br>
+      נחזור אליך תוך 48 שעות עסקים.
+    </p>
+    <a href="mailto:elie.priou7@gmail.com?subject=Deal Desk — יש לי נכס" target="_blank" rel="noopener" class="modal-btn">
+      פתח טופס ← Submit Deal
+    </a>
+    <p class="modal-note">הטופס מאובטח · ללא הרשמה נדרשת</p>
+  </div>
+</div>
+
+<!-- MODAL: INVESTOR -->
+<div class="modal-overlay" id="modal-investor">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('investor')">&#x2715;</button>
+    <p class="modal-label">Join the Pipeline</p>
+    <h3 class="modal-title">הגדר את<br>קריטריוני ה<em>השקעה</em></h3>
+    <p class="modal-body">
+      פרופיל ההשקעה שלך נשאר אצלנו בלבד.
+      נצור קשר אך ורק כשתגיע עסקה שעומדת בכל הקריטריונים שלך.
+      <br><br>
+      אין רשימות תפוצה. אין שיחות קרות.
+    </p>
+    <a href="mailto:elie.priou7@gmail.com?subject=Deal Desk — אני מחפש להשקיע" target="_blank" rel="noopener" class="modal-btn">
+      פתח טופס ← Join Pipeline
+    </a>
+    <p class="modal-note">הטופס מאובטח · ללא הרשמה נדרשת</p>
+  </div>
+</div>
+
+<script>
+  function openModal(type) {
+    document.getElementById('modal-' + type).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(type) {
+    document.getElementById('modal-' + type).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  // Close on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+  // Close on ESC
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(m => {
+        m.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
