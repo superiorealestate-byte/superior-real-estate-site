@@ -1037,5 +1037,60 @@ class Component extends DCLogic {
   }
 }
 </script>
+
+<!-- ══════════════════════════════════════════
+     ALEX — PRIVATE ADVISOR BUTTON + OVERLAY
+══════════════════════════════════════════ -->
+<style>
+  #alex-fab{
+    position:fixed;bottom:96px;right:24px;z-index:200;
+    width:56px;height:56px;border-radius:50%;
+    background:#0C0C0F;border:1px solid rgba(201,169,110,.6);
+    color:#C9A96E;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+    transition:all .35s;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:24px;font-weight:300;line-height:1;
+  }
+  #alex-fab:hover{
+    background:rgba(201,169,110,.1);
+    border-color:#C9A96E;
+    box-shadow:0 0 28px rgba(201,169,110,.35);
+    transform:translateY(-2px);
+  }
+  #alex-tip{
+    position:fixed;bottom:108px;right:88px;z-index:200;
+    background:#0C0C0F;border:1px solid rgba(201,169,110,.25);
+    color:#C9A96E;
+    font-family:'Jost',Arial,sans-serif;
+    font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+    padding:6px 12px;opacity:0;pointer-events:none;
+    transition:opacity .25s;white-space:nowrap;
+  }
+  #alex-fab:hover~#alex-tip{opacity:1}
+  #alex-overlay{
+    display:none;position:fixed;inset:0;z-index:300;
+    background:#060608;flex-direction:column;
+  }
+  #alex-overlay.alex-open{display:flex}
+  #alex-x{
+    position:absolute;top:14px;right:18px;
+    background:none;border:none;color:#5C574F;
+    font-size:28px;cursor:pointer;z-index:1;
+    line-height:1;padding:6px;transition:color .2s;
+  }
+  #alex-x:hover{color:#C9A96E}
+  #alex-frame{width:100%;height:100%;border:none;flex:1}
+</style>
+<button id="alex-fab" aria-label="Alex — Private Advisor"
+  onclick="document.getElementById('alex-overlay').classList.add('alex-open')">A</button>
+<div id="alex-tip">Private Advisor</div>
+<div id="alex-overlay">
+  <button id="alex-x"
+    onclick="document.getElementById('alex-overlay').classList.remove('alex-open')"
+    aria-label="Close">×</button>
+  <iframe id="alex-frame" src="./alex.html" title="Alex · Superior Real Estate"></iframe>
+</div>
 </body>
 </html>
